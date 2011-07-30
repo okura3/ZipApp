@@ -1,0 +1,10 @@
+<div id="page">
+<form action="/delete/[% id %]" method="POST">
+<input type="hidden" name="subaction" value="confirm">
+<p>Delete Confirm</p>
+<p>
+<input type="submit" name="action" value="Delete">
+<input type="submit" name="action" value="Cancel">
+</p>
+</form>
+</div>

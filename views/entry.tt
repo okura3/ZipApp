@@ -1,0 +1,37 @@
+<div id="page">
+<h3>Zip Book</h3>
+[%- IF entry.id == 0 -%]
+<form action="/entry" id="entry" method="POST">
+[%- ELSE -%]
+<form action="/entry/[% entry.id %]" id="entry" method="POST">
+<input type="hidden" name="id" value="[% entry.id %]">
+[%- END -%]
+<input type="hidden" name="subaction" value="exec">
+<p><div style="float:left;width:8em;text-align:right"><label for="code">code : </label></div><input type="text" id="code" name="code" value="[% entry.code %]"></p>
+<p><div style="float:left;width:8em;text-align:right"><label for="zipold">zipold : </label></div><input type="text" id="zipold" name="zipold" value="[% entry.zipold %]"></p>
+<p><div style="float:left;width:8em;text-align:right"><label for="zipcode">zipcode : </label></div><input type="text" id="zipcode" name="zipcode" value="[% entry.zipcode %]"></p>
+<p><div style="float:left;width:8em;text-align:right"><label for="ken_kana">ken_kana : </label></div><input type="text" id="ken_kana" name="ken_kana" value="[% entry.ken_kana %]"></p>
+<p><div style="float:left;width:8em;text-align:right"><label for="siku_kana">siku_kana : </label></div><input type="text" id="siku_kana" name="siku_kana" value="[% entry.siku_kana %]"></p>
+<p><div style="float:left;width:8em;text-align:right"><label for="cho_kana">cho_kana : </label></div><input type="text" id="cho_kana" name="cho_kana" value="[% entry.cho_kana %]"></p>
+<p><div style="float:left;width:8em;text-align:right"><label for="ken_char">ken_char : </label></div><input type="text" id="ken_char" name="ken_char" value="[% entry.ken_char %]"></p>
+<p><div style="float:left;width:8em;text-align:right"><label for="siku_char">siku_char : </label></div><input type="text" id="siku_char" name="siku_char" value="[% entry.siku_char %]"></p>
+<p><div style="float:left;width:8em;text-align:right"><label for="cho_char">cho_char : </label></div><input type="text" id="cho_char" name="cho_char" value="[% entry.cho_char %]"></p>
+<p><div style="float:left;width:8em;text-align:right"><label for="flg1">flg1 : </label></div><input type="text" id="flg1" name="flg1" value="[% entry.flg1 %]"></p>
+<p><div style="float:left;width:8em;text-align:right"><label for="flg2">flg2 : </label></div><input type="text" id="flg2" name="flg2" value="[% entry.flg2 %]"></p>
+<p><div style="float:left;width:8em;text-align:right"><label for="flg3">flg3 : </label></div><input type="text" id="flg3" name="flg3" value="[% entry.flg3 %]"></p>
+<p><div style="float:left;width:8em;text-align:right"><label for="flg4">flg4 : </label></div><input type="text" id="flg4" name="flg4" value="[% entry.flg4 %]"></p>
+<p><div style="float:left;width:8em;text-align:right"><label for="flg5">flg5 : </label></div><input type="text" id="flg5" name="flg5" value="[% entry.flg5 %]"></p>
+<p><div style="float:left;width:8em;text-align:right"><label for="flg6">flg6 : </label></div><input type="text" id="flg6" name="flg6" value="[% entry.flg6 %]"></p>
+<p>
+<div style="float:left;width:8em;text-align:right">&nbsp;</div>
+[%- IF entry.id == 0 -%]
+<input type="submit" name="action" value="Create">
+[%- ELSE -%]
+<input type="submit" name="action" value="Update">
+<input type="submit" name="action" value="Delete">
+[%- END -%]
+<input type="reset" name="action" value="Reset">
+</p>
+</form>
+[% flash %]
+</div>

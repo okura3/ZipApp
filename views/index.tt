@@ -1,0 +1,87 @@
+<div id="page">
+<form action="/" method="POST">
+<input type="hidden" name="subaction" value="exec">
+<p>
+Zip Code : <input type="text" name="zipcode" value="[% params.zipcode %]">
+</p>
+<p>
+<input type="submit" name="search" value="Search">
+<input type="reset" name="reset" value="Reset">
+</p>
+</form>
+<hr>
+<div id="search_result">
+<p id="page_navi">
+[%- MACRO mini(a, b) BLOCK -%]
+[%- IF a < b -%]
+[%- a -%]
+[%- ELSE -%]
+[%- b -%]
+[%- END -%]
+[%- END -%]
+
+[%- MACRO maxi(a, b) BLOCK -%]
+[%- IF a > b -%]
+[%- a -%]
+[%- ELSE -%]
+[%- b -%]
+[%- END -%]
+[%- END -%]
+
+[%- MACRO pivot(p, num) BLOCK -%]
+[%- IF p == num -%]
+<span style="font-size:1.4em;">[[% num %]]</span>
+[%- ELSE -%]
+<a href="[% num %]">[[% num %]]</a>
+[%- END -%]
+[%- END -%]
+
+[%- w = 6 -%]
+[%- n = pager.last_page -%]
+[%- p = pager.current_page -%]
+[%- IF n <= w * 2 + 5 -%]
+1
+[%- FOREACH num IN [ 2 .. n ] -%]
+[%- pivot(p,num) -%]
+[%- END -%]
+[%- ELSE -%]
+[%- pivot(p, 1) -%]
+[%- IF p - w <= 3 -%]
+[%- pivot(p, 2) -%]
+[%- ELSE -%]
+..
+[%- END -%]
+[%- lefti  = maxi(3, mini(n - 2 * w - 2, p - w)); -%]
+[%- righti = maxi(2 * w + 3, mini( n - 2, p + w)); -%]
+[%- FOREACH num in [ lefti .. righti ] -%]
+[%- pivot(p, num) -%]
+[%- END -%]
+[%- IF p + w >= n - 2 -%]
+[%- pivot(p, n-1) -%]
+[%- ELSE -%]
+..
+[%- END -%]
+[%- pivot(p,n) -%]
+[%- END -%]
+</p>
+<table>
+<tr>
+<th>id</th>
+<th>zip</th>
+<th>ken</th>
+<th>shiku</th>
+<th>cho</th>
+</tr>
+[% FOREACH row IN rows %]
+<tr>
+<td>[% row.id %]</td>
+<td>[% row.zipcode %]</td>
+<td>[% row.ken_char %]</td>
+<td>[% row.siku_char %]</td>
+<td>[% row.cho_char %]</td>
+</tr>
+[% END %]
+</table>
+</div>
+<hr>
+</div>

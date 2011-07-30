@@ -1,0 +1,88 @@
+<div id="page">
+<h3>Zip Book</h3>
+<form action="/list" method="POST">
+<input type="hidden" name="subaction" value="exec">
+<p><div style="float:left;width:8em;text-align:right;">Zip Code : </div><input type="text" name="zipcode" value="[% params.zipcode %]"></p>
+<p><div style="float:left;width:8em;text-align:right;">Siku_char : </div><input type="text" name="siku_char" value="[% params.siku_char %]"></p>
+<p><div style="float:left;width:8em;text-align:right;">Cho_char: </div><input type="text" name="cho_char" value="[% params.cho_char %]"></p>
+<p>
+<div style="float:left;width:8em;">&nbsp;</div>
+<input type="submit" name="search" value="Search">
+<input type="reset" name="reset" value="Reset">
+</p>
+</form>
+<hr>
+<div id="search_result">
+<p id="page_navi">
+[%- MACRO mini(a, b) BLOCK -%]
+[%- IF a < b -%]
+[%- a -%]
+[%- ELSE -%]
+[%- b -%]
+[%- END -%]
+[%- END -%]
+
+[%- MACRO maxi(a, b) BLOCK -%]
+[%- IF a > b -%]
+[%- a -%]
+[%- ELSE -%]
+[%- b -%]
+[%- END -%]
+[%- END -%]
+
+[%- MACRO pivot(p, num) BLOCK -%]
+[%- IF p == num -%]
+<span style="font-size:1.4em;">[[% num %]]</span>
+[%- ELSE -%]
+<a href="/list/[% num %]?zipcode=[% zipcode | uri %]&amp;siku_char=[% siku_char | uri %]&amp;cho_char=[% cho_char | uri %]">[[% num %]]</a>
+[%- END -%]
+[%- END -%]
+
+[%- w = 4 -%]
+[%- n = pager.last_page -%]
+[%- p = pager.current_page -%]
+[%- IF n <= w * 2 + 5 -%]
+[%- FOREACH num IN [ 1 .. n ] -%]
+[%- pivot(p,num) -%]
+[%- END -%]
+[%- ELSE -%]
+[%- pivot(p, 1) -%]
+[%- IF p - w <= 3 -%]
+[%- pivot(p, 2) -%]
+[%- ELSE -%]
+..
+[%- END -%]
+[%- lefti  = maxi(3, mini(n - 2 * w - 2, p - w)); -%]
+[%- righti = maxi(2 * w + 3, mini( n - 2, p + w)); -%]
+[%- FOREACH num in [ lefti .. righti ] -%]
+[%- pivot(p, num) -%]
+[%- END -%]
+[%- IF p + w >= n - 2 -%]
+[%- pivot(p, n-1) -%]
+[%- ELSE -%]
+..
+[%- END -%]
+[%- pivot(p,n) -%]
+[%- END -%]
+</p>
+<table>
+<tr>
+<th>id</th>
+<th>zip</th>
+<th>ken</th>
+<th>siku_char</th>
+<th>cho_char</th>
+</tr>
+[% FOREACH entry IN entries %]
+<tr>
+<td><a href="/entry/[% entry.id %]">[% entry.id %]</a></td>
+<td>[% entry.zipcode %]</td>
+<td>[% entry.ken_char %]</td>
+<td>[% entry.siku_char %]</td>
+<td>[% entry.cho_char %]</td>
+</tr>
+[% END %]
+</table>
+</div>
+<hr>
+</div>
