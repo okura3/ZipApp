@@ -3,3 +3,11 @@ ZipApp
 My exercise app for perl Dancer.
 
 CRUD for Japanese Postal code.
+
+Prepare Zip database.
+Execute
+
+$ sh bin/download_zip.sh
+$ sh bin/create_zip.sh
+$ perl bin/load_zip.pl
+

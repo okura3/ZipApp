@@ -2,5 +2,5 @@ lib/*.bak
 bin/test.pl
 bin/debug.pl
 sessions/
-data/zip.sqlite
+data/
 xslate_cache/
