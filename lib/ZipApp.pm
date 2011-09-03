@@ -5,10 +5,37 @@ use Dancer;
 use URI::Escape;
 use ZipApp::Model;
 use ZipApp::View;
+use Dancer::Plugin::Auth::Twitter::Lite; # not cpan module
+
+auth_twitter_init();
 
 before sub {
   var view  => ZipApp::View->new();
   var model => ZipApp::Model->new();
+
+  my $request_path = request->path;
+  return if $request_path =~ m{^/auth/twitter/callback};
+  return if $request_path =~ m{^/fail};
+  return if $request_path !~ m{^/entry};
+  if ( not session('twitter_user') ) {
+    #request->params->{'screen_name'} = undef;
+    session '_stash' => { request_path => $request_path };
+    return redirect auth_twitter_authenticate_url;
+  }
+  #request->params->{'screen_name'} = session('twitter_user')->{'screen_name'};
+};
+
+get '/success' => sub {
+  my $request_path = session('_stash')->{request_path};
+  session '_stash' => { request_path => undef };
+  return redirect uri_for( $request_path );
+};
+
+get '/fail' => sub {"FAIL"};
+
+get '/logout' => sub {
+  session->destroy();
+  return "Logout";
 };
 
 get '/' => sub {

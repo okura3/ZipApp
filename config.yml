@@ -17,3 +17,10 @@ plugins:
       options:
         sqlite_unicode: 1
         RaiseError: 1
+  "Auth::Twitter::Lite":
+    consumer_key: 
+    consumer_secret: 
+    callback_url: "http://localhost:3000/auth/twitter/callback"
+    callback_success: "/success"
+    callback_fail: "/fail"
+

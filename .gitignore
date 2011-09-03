@@ -4,3 +4,5 @@ bin/debug.pl
 sessions/
 data/
 xslate_cache/
+config_private.yml
+config_dist.yml
