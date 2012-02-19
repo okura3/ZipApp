@@ -9,7 +9,7 @@ use Dancer::Plugin::Auth::Twitter::Lite; # not cpan module
 
 auth_twitter_init();
 
-before sub {
+hook before => sub {
   var view  => ZipApp::View->new();
   var model => ZipApp::Model->new();
 

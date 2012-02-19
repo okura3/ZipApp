@@ -6,7 +6,6 @@ template: "xslate"
 engines:
   xslate:
     syntax: TTerse
-    suffix: '.tt'
     cache: 1
     cache_dir: xslate_cache
 plugins:
@@ -23,4 +22,3 @@ plugins:
     callback_url: "http://localhost:3000/auth/twitter/callback"
     callback_success: "/success"
     callback_fail: "/fail"
-
